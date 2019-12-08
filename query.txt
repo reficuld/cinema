@@ -1,0 +1,89 @@
+create (f:Gost {userName:"Fica", passWord:"filip"}),
+		(c:Gost {userName:"Aleksandar", passWord:"coa"}), 
+		(d:Gost {userName:"Dimitrije", passWord:"dimi"}),
+		(a:Gost {userName:"Darko", passWord:"dare"}),
+		(xx:Gost {userName:"user", passWord:"user"})
+
+create (b:Bioskop {naziv:"Kupina", grad:"Nis", adresa: "Obrenoviceva 4", brojSala: "4"}), 
+		(e:Bioskop {naziv:"Cineplexx", grad:"Nis", adresa: "Bulevar Medijana 31", brojSala: "5"})
+		
+create (m1:Film {naziv:"Schildler's list", godinaIzdavanja:"1993"})
+	create (ln:Glumac {ime:"Liam Neeson", godinaRodjenja:"1952", mestoRodjenja:"Engleska"})
+	create (rf:Glumac {ime:"Ralph Fiennes", godinaRodjenja:"1962", mestoRodjenja:"Engleska"})
+	create (bk:Glumac {ime:"Ben Kingsley", godinaRodjenja:"1943", mestoRodjenja:"Engleska"})
+	create (ss:Reziser {ime:"Steven Spielberg", godinaRodjenja:"1941", mestoRodjenja:"Engleska"})
+	create
+		(ln)-[:GLUMIO {uloga:"Oscar Schildler"}]->(m1), 
+		(rf)-[:GLUMIO {uloga:"Amon Goeth"}]->(m1),
+		(bk)-[:GLUMIO {uloga:"Itzhak Stern"}]->(m1),
+		(ss)-[:REZIRAO]->(m1)
+	
+create (m2:Film {naziv:"Juzni Vetar", godinaIzdavanja:"2018"})
+	create (mb:Glumac {ime:"Milos Bikovic", godinaRodjenja:"1988", mestoRodjenja:"Srbija"})
+	create (db:Glumac {ime:"Dragan Bjelogrlic", godinaRodjenja:"1965", mestoRodjenja:"Srbija"})
+	create (ng:Glumac {ime:"Nebojsa Glogovac", godinaRodjenja:"1969", mestoRodjenja:"Srbija"})
+	create (ma:Reziser {ime:"Milos Avramovic", godinaRodjenja:"1955", mestoRodjenja:"Srbija"})
+	create
+		(mb)-[:GLUMIO {uloga:"Maros"}]->(m2), 
+		(db)-[:GLUMIO {uloga:"Car"}]->(m2),
+		(ng)-[:GLUMIO {uloga:"Golub"}]->(m2),
+		(ma)-[:REZIRAO]->(m2)
+		
+create (s1:Sala {brojSale:"1", brojRedova:"5", brojSedistaPoRedu:"6"}),
+		(s2:Sala {brojSale:"2", brojRedova:"5", brojSedistaPoRedu:"6"}),
+		(s3:Sala {brojSale:"3", brojRedova:"10", brojSedistaPoRedu:"6"}),
+		(s4:Sala {brojSale:"4", brojRedova:"6", brojSedistaPoRedu:"7"}),
+		(s5:Sala {brojSale:"1", brojRedova:"6", brojSedistaPoRedu:"8"}),
+		(s6:Sala {brojSale:"2", brojRedova:"7", brojSedistaPoRedu:"5"}),
+		(s7:Sala {brojSale:"3", brojRedova:"5", brojSedistaPoRedu:"8"}),
+		(s8:Sala {brojSale:"4", brojRedova:"6", brojSedistaPoRedu:"6"}),
+		(s9:Sala {brojSale:"5", brojRedova:"4", brojSedistaPoRedu:"7"}),
+		(b)-[:POSEDUJE]->(s1),
+		(b)-[:POSEDUJE]->(s2),
+		(b)-[:POSEDUJE]->(s3),
+		(b)-[:POSEDUJE]->(s4),
+		(e)-[:POSEDUJE]->(s5),
+		(e)-[:POSEDUJE]->(s6),
+		(e)-[:POSEDUJE]->(s7),
+		(e)-[:POSEDUJE]->(s8),
+		(e)-[:POSEDUJE]->(s9)
+
+create (p1:Prikaz {datum:"18.01.2019", vreme:"16:00", projekcija:"2D", cena:"200"}), 
+		(p2:Prikaz {datum:"18.01.2019", vreme:"18:00", projekcija:"3D", cena:"300"}),
+		(p3:Prikaz {datum:"18.01.2019", vreme:"20:00", projekcija:"2D", cena:"200"}),
+		(p4:Prikaz {datum:"18.01.2019", vreme:"22:00", projekcija:"3D", cena:"300"}),
+		(p5:Prikaz {datum:"19.01.2019", vreme:"14:00", projekcija:"2D", cena:"200"}),
+		(p6:Prikaz {datum:"19.01.2019", vreme:"16:00", projekcija:"3D", cena:"300"}),
+		(p7:Prikaz {datum:"19.01.2019", vreme:"17:00", projekcija:"3D", cena:"300"}),
+		(p8:Prikaz {datum:"19.01.2019", vreme:"19:00", projekcija:"2D", cena:"200"})
+		
+		create
+			(b)-[:PRIKAZUJE]->(p1),
+			(b)-[:PRIKAZUJE]->(p2),
+			(b)-[:PRIKAZUJE]->(p3),
+			(b)-[:PRIKAZUJE]->(p4),
+			(e)-[:PRIKAZUJE]->(p5),
+			(e)-[:PRIKAZUJE]->(p6),
+			(e)-[:PRIKAZUJE]->(p7),
+			(e)-[:PRIKAZUJE]->(p8),
+			(e)-[:PRIKAZUJE]->(p9),
+			(p1)-[:U_SALI]->(s1),
+			(p2)-[:U_SALI]->(s1),
+			(p3)-[:U_SALI]->(s2),
+			(p4)-[:U_SALI]->(s4),
+			(p5)-[:U_SALI]->(s4),
+			(p6)-[:U_SALI]->(s7),
+			(p7)-[:U_SALI]->(s8),
+			(p8)-[:U_SALI]->(s9),
+			(p9)-[:U_SALI]->(s9),
+			(p1)-[:EMITUJE]->(m1),
+			(p2)-[:EMITUJE]->(m2),
+			(p3)-[:EMITUJE]->(m1),
+			(p4)-[:EMITUJE]->(m2),
+			(p5)-[:EMITUJE]->(m1),
+			(p6)-[:EMITUJE]->(m2),
+			(p7)-[:EMITUJE]->(m1),
+			(p8)-[:EMITUJE]->(m2),
+			(p9)-[:EMITUJE]->(m1)
+
+		
